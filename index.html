@@ -26,6 +26,17 @@ id="my-broadcaster"
     // Post the start action via postMessage
     broadcaster.postMessage({action: 'start'}, '*');
   }
+
+  window.addEventListener('message', function(event) {
+  if (event.origin !== 'https://dist.bambuser.net') {
+    // Don't trust messages from other origins
+    return;
+  }
+  var broadcasterEvent = event.data.broadcasterEvent;
+  if (broadcasterEvent && broadcasterEvent.name === 'registeredBroadcastId') {
+    console.log('broadcast id: ', broadcasterEvent.data);
+  }
+}, false);
 </script>
 </body>
 </html>
