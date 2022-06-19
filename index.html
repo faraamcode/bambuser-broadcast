@@ -10,11 +10,23 @@
 <body>
     <h1>Wooozee streaming 3</h1>
 <iframe
+id="my-broadcaster"
   src="https://dist.bambuser.net/broadcaster/?application_id=pTXkA7aqYPkC5WuVQsB9pw&ticket=domain%3Djoyful-pasca-13ffa3.netlify.app&da_signature_header=da_id%3D29798cbf-ddcf-a21d-e4c7-ce0774f4d64c%26da_timestamp%3D1655676990%26da_signature_method%3DHMAC-SHA256%26da_ttl%3D0%26da_static%3D1%26da_signature%3D74b3777e59449620af056490586859db21c895d8fdf74ea1b969460baeeae76a"
   style="border: none"
   allowfullscreen
   allow="microphone; camera">
 </iframe>
+
+<button onclick="startBroadcasting();">Start</button>
+<script>
+  // Reference the embeded broadcaster iframe
+  var broadcaster = document.getElementById('my-broadcaster').contentWindow;
+  function startBroadcasting() {
+    if (!broadcaster) return;
+    // Post the start action via postMessage
+    broadcaster.postMessage({action: 'start'}, '*');
+  }
+</script>
 </body>
 </html>
 
